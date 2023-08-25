@@ -2,6 +2,8 @@
 \usetheme{smau}
 \usecolortheme{smau}
 
+\usepackage{multirow}
+
 %-------------------------------------------------------------------------------
 
 %Information to be included in the title page:
@@ -30,38 +32,53 @@
 
 \frame{\sectionpage}
 
-\begin{frame}[t,fragile]
+\begin{frame}
 	\frametitle{Compute}
-	\begin{verbatim}
-		 partition           || nodes | CPU cores |  GPUs || job runtime     | mem/core        | per-node
-		 name         public || total |     total | total || default maximum | default maximum |    cores   mem(GB)  gpus
-		------------------------------------------------------------------------------------------------------------------
-		 normal*      yes    ||   179 |      4820 |     0 ||      2h      7d |     6GB     8GB |    20-32   128-256     0
-		 bigmem       yes    ||     9 |       504 |     0 ||      2h      1d |     8GB    64GB |   24-128  384-4096     0
-		 gpu          yes    ||    26 |       748 |   104 ||      1h      2d |     7GB    12GB |    20-32   191-256     4
-		 dev          yes    ||     4 |       104 |    64 ||      1h      2h |     6GB     8GB |    20-32   128-256  0-32
-		------------------------------------------------------------------------------------------------------------------
-		 kipac        no     ||   112 |      3360 |     0 ||      2h      7d |     7GB     8GB |    24-32   191-256     0
-		 hns          no     ||   105 |      3728 |     0 ||      2h      7d |     6GB    25GB |   20-128  128-1024     0
-		------------------------------------------------------------------------------------------------------------------
-		 owners       no     ||  1471 |     47080 |   636 ||      2h      2d |     4GB    48GB |   20-128  128-4096   0-8
-		------------------------------------------------------------------------------------------------------------------
-	\end{verbatim}
+	Sherlock:
+	\begin{center}
+		\begin{tabular}{|l|l||r|r|r||r|r|r|}
+			\hline
+			\multicolumn{2}{|c||}{partition} & nodes & CPU cores & GPUs & \multicolumn{3}{|c|}{per-node} \\
+			 name      &  public & total &     total & total &  cores &  mem(GB) & gpus \\
+			\hline
+			 normal*   &  yes    &   179 &      4820 &     0 &  20--32 &  128--256 &    0 \\
+			 bigmem    &  yes    &     9 &       504 &     0 & 24--128 & 384--4096 &    0 \\
+			 gpu       &  yes    &    26 &       748 &   104 &  20--32 &  191--256 &    4 \\
+			 dev       &  yes    &     4 &       104 &    64 &  20--32 &  128--256 & 0--32 \\
+			\hline
+			 kipac     &  no     &   112 &      3360 &     0 &  24--32 &  191--256 &    0 \\
+			 hns       &  no     &   105 &      3728 &     0 & 20--128 & 128--1024 &    0 \\
+			\hline
+			 owners    &  no     &  1471 &     47080 &   636 & 20--128 & 128--4096 &  0--8 \\
+			\hline
+		\end{tabular}
+		%  partition           || nodes | CPU cores |  GPUs || job runtime     | mem/core        | per-node
+		%  name         public || total |     total | total || default maximum | default maximum |    cores   mem(GB)  gpus
+		% ------------------------------------------------------------------------------------------------------------------
+		%  normal*      yes    ||   179 |      4820 |     0 ||      2h      7d |     6GB     8GB |    20-32   128-256     0
+		%  bigmem       yes    ||     9 |       504 |     0 ||      2h      1d |     8GB    64GB |   24-128  384-4096     0
+		%  gpu          yes    ||    26 |       748 |   104 ||      1h      2d |     7GB    12GB |    20-32   191-256     4
+		%  dev          yes    ||     4 |       104 |    64 ||      1h      2h |     6GB     8GB |    20-32   128-256  0-32
+		% ------------------------------------------------------------------------------------------------------------------
+		%  kipac        no     ||   112 |      3360 |     0 ||      2h      7d |     7GB     8GB |    24-32   191-256     0
+		%  hns          no     ||   105 |      3728 |     0 ||      2h      7d |     6GB    25GB |   20-128  128-1024     0
+		% ------------------------------------------------------------------------------------------------------------------
+		%  owners       no     ||  1471 |     47080 |   636 ||      2h      2d |     4GB    48GB |   20-128  128-4096   0-8
+		% ------------------------------------------------------------------------------------------------------------------
+	\end{center}
+	My laptop: 8 cores, 32 GB mem, 0 gpus
 \end{frame}
 
-\begin{frame}[t]
-	\frametitle{Homes}
-		\texttt{\$HOME}, \texttt{\$GROUP\_HOME}
-\end{frame}
-
-\begin{frame}[t]
-	\frametitle{Scratch Space}
-		\texttt{\$SCRATCH}, \texttt{\$GROUP\_SCRATCH}
-\end{frame}
-
-\begin{frame}[t]
-	\frametitle{OAK}
-		\texttt{\$OAK}
+\begin{frame}
+	\frametitle{Storage}
+	\begin{itemize}
+		\item \texttt{\$HOME}: 15GB
+		\item \texttt{\$GROUP\_HOME}: 1TB
+		\item \texttt{\$SCRATCH}: 100TB\footnote{files not modified after 90 days are automatically deleted}
+		\item \texttt{\$GROUP\_SCRATCH}: 100TB\footnotemark[\value{footnote}]
+		\item \texttt{\$OAK}: 1.3PB
+		\item My laptop: 512GB
+	\end{itemize}
 \end{frame}
 
 %-------------------------------------------------------------------------------
