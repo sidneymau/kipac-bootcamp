@@ -1,0 +1,78 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{smau}
+\usecolortheme{smau}
+
+%-------------------------------------------------------------------------------
+
+%Information to be included in the title page:
+\title{Sherlock}
+\subtitle{KIPAC Computing Bootcamp 2023}
+\author[S. Mau]{Sidney Mau}
+\institute[Stanford]{Stanford University}
+\date[\today]{\today}
+
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Resources}
+
+\frame{\sectionpage}
+
+\begin{frame}[t,fragile]
+	\frametitle{Compute}
+	\begin{verbatim}
+		 partition           || nodes | CPU cores |  GPUs || job runtime     | mem/core        | per-node
+		 name         public || total |     total | total || default maximum | default maximum |    cores   mem(GB)  gpus
+		------------------------------------------------------------------------------------------------------------------
+		 normal*      yes    ||   179 |      4820 |     0 ||      2h      7d |     6GB     8GB |    20-32   128-256     0
+		 bigmem       yes    ||     9 |       504 |     0 ||      2h      1d |     8GB    64GB |   24-128  384-4096     0
+		 gpu          yes    ||    26 |       748 |   104 ||      1h      2d |     7GB    12GB |    20-32   191-256     4
+		 dev          yes    ||     4 |       104 |    64 ||      1h      2h |     6GB     8GB |    20-32   128-256  0-32
+		------------------------------------------------------------------------------------------------------------------
+		 kipac        no     ||   112 |      3360 |     0 ||      2h      7d |     7GB     8GB |    24-32   191-256     0
+		 hns          no     ||   105 |      3728 |     0 ||      2h      7d |     6GB    25GB |   20-128  128-1024     0
+		------------------------------------------------------------------------------------------------------------------
+		 owners       no     ||  1471 |     47080 |   636 ||      2h      2d |     4GB    48GB |   20-128  128-4096   0-8
+		------------------------------------------------------------------------------------------------------------------
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Homes}
+		\texttt{\$HOME}, \texttt{\$GROUP\_HOME}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Scratch Space}
+		\texttt{\$SCRATCH}, \texttt{\$GROUP\_SCRATCH}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{OAK}
+		\texttt{\$OAK}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Running Jobs}
+
+\frame{\sectionpage}
+
+\begin{frame}[t]
+	\frametitle{SLURM}
+		SLURM is a job management tool used by many high-performance computing clusters including Sherlock.
+\end{frame}
+
+\end{document}

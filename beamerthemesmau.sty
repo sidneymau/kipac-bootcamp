@@ -1,0 +1,44 @@
+\RequirePackage{hyperref}
+
+% Hyperlink formatting
+\hypersetup{
+	colorlinks=true,
+	allcolors=.,
+	urlcolor=blue,
+}
+
+% Beamer settings
+\usefonttheme{serif} % default family is sans serif
+\setbeamercovered{transparent} % transparent itemization
+% \setbeamertemplate{itemize subsubitem}[circle]
+\setbeamertemplate{itemize items}[circle]
+% \useinnertheme{circles}
+
+\AtBeginDocument{%
+	\DeclareSymbolFont{pureletters}{T1}{lmr}{\mddefault}{it}%
+}
+
+\beamertemplatenavigationsymbolsempty % no navigation symbols
+% \addtobeamertemplate{navigation symbols}{}{%
+% 	\usebeamerfont{footline}%
+% 	\usebeamercolor[fg]{footline}%
+% 	\hspace{1em}%
+% 	\insertframenumber/\inserttotalframenumber
+% }
+
+% \setbeamertemplate{headline}{%
+% 	\begin{beamercolorbox}{section in head/foot}
+% 		\vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+% 	\end{beamercolorbox}
+% }
+
+\setbeamertemplate{footline}{%
+	\begin{beamercolorbox}{section in head/foot}
+		\hspace{2pt} \href{https://sidneymau.com}{\insertshortauthor}\ \textbar\ \insertshortinstitute
+		\hfill
+		\insertframenumber/\inserttotalframenumber \hspace{2pt}
+		\vspace{2pt}
+	\end{beamercolorbox}
+}
+
+\setbeamertemplate{bibliography item}{}
