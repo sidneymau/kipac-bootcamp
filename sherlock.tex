@@ -28,9 +28,18 @@
 
 %-------------------------------------------------------------------------------
 
-\section{Resources}
+\section{Why use Sherlock?}
 
 \frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{What is Sherlock?}
+	\begin{itemize}
+		\item Sherlock is a research computing \emph{cluster} at Stanford
+		\item KIPAC members have access to a number of proprietary resources at Sherlock through KIPAC and the School of Humanities and Sciences
+		\item Sherlock is a great place to run intensive code, save datasets, collaborate with other KIPAC members, \dots
+	\end{itemize}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Compute}
@@ -52,19 +61,6 @@
 			 owners    &  no     &  1471 &     47080 &   636 & 20--128 & 128--4096 &  0--8 \\
 			\hline
 		\end{tabular}
-		%  partition           || nodes | CPU cores |  GPUs || job runtime     | mem/core        | per-node
-		%  name         public || total |     total | total || default maximum | default maximum |    cores   mem(GB)  gpus
-		% ------------------------------------------------------------------------------------------------------------------
-		%  normal*      yes    ||   179 |      4820 |     0 ||      2h      7d |     6GB     8GB |    20-32   128-256     0
-		%  bigmem       yes    ||     9 |       504 |     0 ||      2h      1d |     8GB    64GB |   24-128  384-4096     0
-		%  gpu          yes    ||    26 |       748 |   104 ||      1h      2d |     7GB    12GB |    20-32   191-256     4
-		%  dev          yes    ||     4 |       104 |    64 ||      1h      2h |     6GB     8GB |    20-32   128-256  0-32
-		% ------------------------------------------------------------------------------------------------------------------
-		%  kipac        no     ||   112 |      3360 |     0 ||      2h      7d |     7GB     8GB |    24-32   191-256     0
-		%  hns          no     ||   105 |      3728 |     0 ||      2h      7d |     6GB    25GB |   20-128  128-1024     0
-		% ------------------------------------------------------------------------------------------------------------------
-		%  owners       no     ||  1471 |     47080 |   636 ||      2h      2d |     4GB    48GB |   20-128  128-4096   0-8
-		% ------------------------------------------------------------------------------------------------------------------
 	\end{center}
 	My laptop: 8 cores, 32 GB mem, 0 gpus
 \end{frame}
@@ -74,10 +70,27 @@
 	\begin{itemize}
 		\item \texttt{\$HOME}: 15GB
 		\item \texttt{\$GROUP\_HOME}: 1TB
-		\item \texttt{\$SCRATCH}: 100TB\footnote{files not modified after 90 days are automatically deleted}
+		\item \texttt{\$SCRATCH}: 100TB\footnote{Files not modified after 90 days are automatically deleted.}
 		\item \texttt{\$GROUP\_SCRATCH}: 100TB\footnotemark[\value{footnote}]
-		\item \texttt{\$OAK}: 1.3PB
+		\item \texttt{\$OAK}: 1.3PB\footnote{Contact Phil Mansfield if you think you need access to Oak.}
 		\item My laptop: 512GB
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Connecting to Sherlock}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]
+	\frametitle{Connecting}
+	\begin{itemize}
+		\item Use \texttt{ssh} on the command line:
+			\begin{verbatim}
+				ssh <username>@login.sherlock.stanford.edu
+			\end{verbatim}
+		\item Navigate a web browser to \url{login.sherlock.stanford.edu}
 	\end{itemize}
 \end{frame}
 
@@ -87,9 +100,103 @@
 
 \frame{\sectionpage}
 
-\begin{frame}[t]
-	\frametitle{SLURM}
-		SLURM is a job management tool used by many high-performance computing clusters including Sherlock.
+\begin{frame}
+	\frametitle{Slurm}
+	\begin{itemize}
+		\item Do \emph{not} run code on the login nodes; instead, submit jobs using \emph{slurm}.
+		\item Slurm is a job management tool used by many high-performance computing clusters including Sherlock.
+		\item To use slurm, you can write a script that requests resources and includes the steps to run your job.
+		\item Use \texttt{sbatch} to submit your job to the \emph{queue}; slurm will dispatch jobs from the queue to the compute resources in a way that ensures resources are farily allocated among all users.
+	\end{itemize}
 \end{frame}
+
+% sbatch options https://slurm.schedmd.com/sbatch.html
+
+% TODO series of example scripts for different configs
+
+% - https://docs.nersc.gov/systems/perlmutter/running-jobs/#example-scripts
+% - https://www.sherlock.stanford.edu/docs/user-guide/running-jobs/#batch-jobs
+
+\begin{frame}
+	\frametitle{Contents of an sbatch script}
+	\begin{itemize}
+		\item An sbatch script is a shell script with special comments to specify slurm arguments
+		\item A shebang specifies which shell is to be used
+		\item The sbatch arguments follow
+		\item The job (written as a bash script) follows
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{sbatch script}
+	\begin{verbatim}
+		#!/bin/bash
+		#SBATCH --partition=kipac
+		#SBATCH --ntasks=1
+		#SBATCH --ntasks-per-node=1
+		#SBATCH --cpus-per-task=1
+		#SBATCH --mem=4G
+		#SBATCH --time=1:00:00
+		
+		# content of job goes here
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{sbatch script}
+	\begin{verbatim}
+		#!/bin/bash
+		#SBATCH --partition=kipac
+		#SBATCH -N 1
+		#SBATCH --ntasks-per-node=1
+		#SBATCH -c 32
+		#SBATCH --mem=0
+		#SBATCH --time=1:00:00
+		
+		# content of job goes here
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{sbatch script}
+	\begin{verbatim}
+		#!/bin/bash
+		#SBATCH --partition=kipac
+		#SBATCH --nodes=1
+		#SBATCH --exclusive
+		#SBATCH --mem=0
+		#SBATCH --time=1:00:00
+		
+		# content of job goes here
+	\end{verbatim}
+\end{frame}
+
+% tasks vs nodes vs cpus
+% how to ask for a node:
+
+%-------------------------------------------------------------------------------
+
+\section{File Transfer}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]
+	\frametitle{Data Transfer Nodes}
+	Sherlock has data transfer nodes specifically meant for moving larger amounts of data to/from Sherlock using \texttt{scp}, \texttt{rsync}, etc\ldots:
+	\begin{verbatim}
+		dtn.sherlock.stanford.edu
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Globus}
+	Sherlock has several Globus endpoints:
+	\begin{itemize}
+		\item \texttt{SRCC Sherlock}
+		\item \texttt{SRCC Oak}
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
 
 \end{document}
