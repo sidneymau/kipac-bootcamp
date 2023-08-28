@@ -26,7 +26,7 @@
 
 %-------------------------------------------------------------------------------
 
-\section{Interfacing with Files}
+\section{Interfacing with the Computer}
 
 \frame{\sectionpage}
 
@@ -45,12 +45,13 @@
 	\begin{itemize}
 		\item \texttt{pwd} -- print the present working directory
 		\item \texttt{ls} -- print the contents of the present working directory
-		\item \texttt{mkdir [dir]} -- make directories
-		\item \texttt{cd [dir]} -- change directories
-		\item \texttt{mv [source] [dest]} -- move a file from one location to another
-		\item \texttt{cp [source] [dest]} -- copy a file in one location to another
-		\item \texttt{rm [file]} -- delete a file
 		\item \texttt{touch [file]} -- create an empty file
+		\item \texttt{mkdir [dir]} -- make directories
+		\item \texttt{rm [file]} -- delete a file
+		\item \texttt{rmdir [dir]} -- delete a directory
+		\item \texttt{cd [dir]} -- change directories
+		\item \texttt{cp [source] [dest]} -- copy a file in one location to another
+		\item \texttt{mv [source] [dest]} -- move a file from one location to another (i.e., rename)
 	\end{itemize}
 \end{frame}
 
@@ -131,9 +132,9 @@
 \begin{frame}
 	\frametitle{How does that work again\dots?}
 	\begin{itemize}
-		\item Ask for help!
 		\item \texttt{man [item]} -- display the manual page for an item (e.g., \texttt{ls})\footnote{Not every command has manual pages.}
 		\item \texttt{[command] --help} -- display help for a command\footnote{Not every command has a \texttt{--help} option.}
+		\item Ask for help!
 	\end{itemize}
 \end{frame}
 
@@ -141,7 +142,8 @@
 	\frametitle{Looking for more resources?}
 	\begin{itemize}
 		\item \url{https://swcarpentry.github.io/shell-novice/} -- \textit{The UNIX Shell} from Software Carpentry
-		\item \url{https://missing.csail.mit.edu/} -- \textit{The Missing Semester of Your CS Education} from MIT
+		\item \url{https://missing.csail.mit.edu/2020/course-shell/} -- \textit{the shell} from MIT
+		\item \url{https://sciware.flatironinstitute.org/23_CommandLine/slides.html} -- \textit{Command line and shell interaction} from the Flatiron Institute
 	\end{itemize}
 \end{frame}
 
