@@ -190,7 +190,9 @@
 		\item \texttt{HOME} -- The home directory of the current user
 		\item \texttt{PATH} -- The list of directories from which the shell can run programs
 		\item \texttt{PYTHONPATH} -- The list of directories from which python can import modules
-		\item \texttt{OMP\_NUM\_THREADS} -- The number of threads available to OpenMP\footnote{Used by, e.g., NumPy}
+		\item \texttt{OMP\_NUM\_THREADS} -- The number of threads vailable to OpenMP\footnote{Used by, e.g., \href{https://numpy.org/install/\#numpy-packages--accelerated-linear-algebra-libraries}{NumPy}.}
+		\item \texttt{MKL\_NUM\_THREADS} -- The number of OpenMP threads for Intel MKL\footnotemark[\value{footnote}]
+		\item \texttt{OPENBLAS\_NUM\_THREADS} -- The number of OpenMP threads for OpenBLAS\footnotemark[\value{footnote}]
 	\end{itemize}
 \end{frame}
 
