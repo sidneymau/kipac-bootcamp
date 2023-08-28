@@ -56,6 +56,16 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Special Locations}
+	\begin{itemize}
+		\item \texttt{\~} -- The \emph{home} directory of the current user
+		\item \texttt{.} -- The current directory
+		\item \texttt{..} -- The previous directory
+		\item \texttt{/} -- The \emph{root} directory (i.e., the top-level directory)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Reading Files}
 	\begin{itemize}
 		\item \texttt{less [file]} -- interactively page through a file in the terminal
@@ -125,6 +135,67 @@
 
 %-------------------------------------------------------------------------------
 
+\section{Environment Variables}
+
+\frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{Environment Variables}
+	\begin{itemize}
+		\item An environment variable is simply some variable available to the current \emph{environment}---for example, the current shell session
+		\item The shell and many programs will use environment variables to inform\dots
+			\begin{itemize}
+				\item What programs are available
+				\item What resources are available
+				\item Where to find certain files
+				\item Anything that the code authors decided to add to these
+			\end{itemize}
+		\item Some environment variables are setup in the background
+		\item Some are inferred implcitly
+		\item Some need to be set explicitly
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Accessing Environment Variables}
+	\begin{itemize}
+		\item \texttt{env} -- print all current environment variables
+		\item \texttt{printenv [var]} -- print the specified environment variable
+		\item \texttt{export [name[=word]]} -- Set the environment variable in the current shell
+		\item \texttt{unset [var]} -- Unset (delete) the specified environment variable
+		\item The value of an environment variable can be used in a string by preprending it with ``\$''; for example
+			\begin{verbatim}
+				echo "$PATH"
+			\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Sourcing Scripts}
+	\begin{itemize}
+		\item \texttt{source [filename]} -- Execute a script in the current shell; this will persist any environment variables set in that script
+		\item Note: this is different than running a script with, e.g., \texttt{bash}, which executes the script in a \emph{child} shell; doing so will not persist any set environment variables to the parent shell (i.e., the shell from which the code was run)
+		\item Sourcing a script that sets environment variables is a convenient way to specify and activate a coding environment (i.e., one which includes software needed for a particular project); e.g.,
+			\begin{verbatim}
+				source ~/setup.sh
+			\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Common Environment Variables}
+	\begin{itemize}
+		\item \texttt{SHELL} -- The shell in use
+		\item \texttt{USER} -- The current user
+		\item \texttt{HOME} -- The home directory of the current user
+		\item \texttt{PATH} -- The list of directories from which the shell can run programs
+		\item \texttt{PYTHONPATH} -- The list of directories from which python can import modules
+		\item \texttt{OMP\_NUM\_THREADS} -- The number of threads available to OpenMP\footnote{Used by, e.g., NumPy}
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
 \section{Wrapping Up}
 
 \frame{\sectionpage}
@@ -151,7 +222,7 @@
 	\frametitle{Interested in more advanced topics?}
 	\begin{itemize}
 		\item Terminal multiplexers: \texttt{screen}, \texttt{tmux}
-		\item Alternative shells: \texttt{zsh}, \texttt{fish}, \dots
+		\item Alternative shells: \texttt{zsh}\footnote{The default in macOS since 2019.}, \texttt{fish}, \dots
 		\item Alternative terminal emulators: \texttt{kitty}, \texttt{iTerm2}, \dots
 	\end{itemize}
 \end{frame}
