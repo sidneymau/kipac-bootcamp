@@ -14,15 +14,16 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
+          working_directory: tex
           root_file: |
-            tex/intro.tex
-            tex/command-line.tex
-            tex/sherlock.tex
+            intro.tex
+            command-line.tex
+            sherlock.tex
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            intro.pdf
-            command-line.pdf
-            sherlock.pdf
+            tex/intro.pdf
+            tex/command-line.pdf
+            tex/sherlock.pdf
