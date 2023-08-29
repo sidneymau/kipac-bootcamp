@@ -4,7 +4,7 @@ permissions:
 on:
   push:
     tags:
-      - *
+      - '*'
 jobs:
   build_latex:
     runs-on: ubuntu-latest
