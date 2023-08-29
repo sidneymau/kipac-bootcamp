@@ -14,7 +14,6 @@ jobs:
             command-line.tex
             sherlock.tex
       - name: Release
-      - name: Upload PDF file
         # uses: actions/upload-artifact@v3
         uses: softprops/action-gh-release@v1
         with:
