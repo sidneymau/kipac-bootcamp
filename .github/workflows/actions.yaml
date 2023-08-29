@@ -15,9 +15,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: |
-            intro.tex
-            command-line.tex
-            sherlock.tex
+            tex/intro.tex
+            tex/command-line.tex
+            tex/sherlock.tex
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')

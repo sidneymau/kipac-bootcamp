@@ -1,0 +1,232 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{smau}
+\usecolortheme{smau}
+
+%-------------------------------------------------------------------------------
+
+%Information to be included in the title page:
+\title{The Command Line}
+\subtitle{KIPAC Computing Bootcamp 2023}
+\author[S. Mau]{Sidney Mau}
+\institute[Stanford]{Stanford University}
+\date[\today]{\today}
+
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Interfacing with the Computer}
+
+\frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{The command line interface}
+	The command line is a programmatic way to interface a computer through a \emph{shell}:
+	\begin{itemize}
+		\item Query the computer with some written command
+		\item The command is run by the operating system
+		\item Output is optionally printed back to the terminal
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Navigating directories and files}
+	\begin{itemize}
+		\item \texttt{pwd} -- print the present working directory
+		\item \texttt{ls} -- print the contents of the present working directory
+		\item \texttt{touch [file]} -- create an empty file
+		\item \texttt{rm [file]} -- delete a file
+		\item \texttt{mkdir [dir]} -- make a directory
+		\item \texttt{rmdir [dir]} -- delete a directory
+		\item \texttt{cd [dir]} -- change directories
+		\item \texttt{cp [source] [dest]} -- copy a file in one location to another
+		\item \texttt{mv [source] [dest]} -- move a file from one location to another (i.e., rename)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Special Locations}
+	\begin{itemize}
+		\item \texttt{\~} -- The \emph{home} directory of the current user
+		\item \texttt{.} -- The current directory
+		\item \texttt{..} -- The previous directory
+		\item \texttt{/} -- The \emph{root} directory (i.e., the top-level directory)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reading Files}
+	\begin{itemize}
+		\item \texttt{less [file]} -- interactively page through a file in the terminal
+		\item \texttt{cat [file]} -- output all of a file
+		\item \texttt{head [file]} -- output the first part of a file
+		\item \texttt{tail [file]} -- output the last part of a file
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Some Quick Conventions}
+	\begin{itemize}
+		\item \texttt{q} -- close the current interactive interface (e.g., for \texttt{less}, \texttt{top})
+		\item \texttt{[Tab]} -- autocomplete\footnote{The extent of autocomplete support can be very shell-dependent.}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Writing Files}
+	\begin{itemize}
+		\item \texttt{nano [file]} -- something simple
+		\item \texttt{vim [file]} -- something less simple
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Querying Files}
+	\begin{itemize}
+		\item \texttt{grep [patterns] [file]} -- find and output matches to patterns in a file
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Running Code}
+
+\frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{How do I run a program?}
+	\begin{itemize}
+		\item \texttt{python [script]} -- interpret and run a script with python
+		\item \texttt{[command] \&} -- start a process in the background of the current shell
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Process Control}
+	\begin{itemize}
+		\item \texttt{ps} -- report current processes
+		\item \texttt{jobs} -- show processes running in the current shell
+		\item \texttt{fg} -- bring a process to the foreground
+		\item \texttt{bg} -- resume a suspended process in the background (as if ran with \texttt{\&})
+		\item \texttt{kill [pid]} -- kill a process
+		\item \texttt{top} -- display current processes
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Signals}
+	\begin{itemize}
+		\item \texttt{[Ctrl]+[C]} -- interrupt current foreground process
+		\item \texttt{[Ctrl]+[D]} -- signal end of current foreground process\footnote{For example, this will end the active shell session.}
+		\item \texttt{[Ctrl]+[Z]} -- suspend current foreground process
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Environment Variables}
+
+\frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{Environment Variables}
+	\begin{itemize}
+		\item An environment variable is simply some variable available to the current \emph{environment}---for example, the current shell session
+		\item The shell and many programs will use environment variables to inform\dots
+			\begin{itemize}
+				\item What programs are available
+				\item What resources are available
+				\item Where to find certain files
+				\item Anything that the code authors decided to add to these
+			\end{itemize}
+		\item Some environment variables are setup in the background
+		\item Some are inferred implcitly
+		\item Some need to be set explicitly
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Accessing Environment Variables}
+	\begin{itemize}
+		\item \texttt{env} -- print all current environment variables
+		\item \texttt{printenv [var]} -- print the specified environment variable
+		\item \texttt{export [name[=word]]} -- Set the environment variable in the current shell
+		\item \texttt{unset [var]} -- Unset (delete) the specified environment variable
+		\item The value of an environment variable can be used in a string by preprending it with ``\$''; for example
+			\begin{verbatim}
+				echo "$PATH"
+			\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Sourcing Scripts}
+	\begin{itemize}
+		\item \texttt{source [filename]} -- Execute a script in the current shell; this will persist any environment variables set in that script
+		\item Note: this is different than running a script with, e.g., \texttt{bash}, which executes the script in a \emph{child} shell; doing so will not persist any set environment variables to the parent shell (i.e., the shell from which the code was run)
+		\item Sourcing a script that sets environment variables is a convenient way to specify and activate a coding environment (i.e., one which includes software needed for a particular project); e.g.,
+			\begin{verbatim}
+				source ~/setup.sh
+			\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Common Environment Variables}
+	\begin{itemize}
+		\item \texttt{SHELL} -- The shell in use
+		\item \texttt{USER} -- The current user
+		\item \texttt{HOME} -- The home directory of the current user
+		\item \texttt{PATH} -- The list of directories from which the shell can run programs
+		\item \texttt{PYTHONPATH} -- The list of directories from which python can import modules
+		\item \texttt{OMP\_NUM\_THREADS} -- The number of threads vailable to OpenMP\footnote{Used by, e.g., \href{https://numpy.org/install/\#numpy-packages--accelerated-linear-algebra-libraries}{NumPy}.}
+		\item \texttt{MKL\_NUM\_THREADS} -- The number of OpenMP threads for Intel MKL\footnotemark[\value{footnote}]
+		\item \texttt{OPENBLAS\_NUM\_THREADS} -- The number of OpenMP threads for OpenBLAS\footnotemark[\value{footnote}]
+	\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\section{Wrapping Up}
+
+\frame{\sectionpage}
+
+\begin{frame}
+	\frametitle{How does that work again\dots?}
+	\begin{itemize}
+		\item \texttt{man [item]} -- display the manual page for an item (e.g., \texttt{ls})\footnote{Not every command has manual pages.}
+		\item \texttt{[command] --help} -- display help for a command\footnote{Not every command has a \texttt{--help} option.}
+		\item Ask for help!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Looking for more resources?}
+	\begin{itemize}
+		\item \url{https://swcarpentry.github.io/shell-novice/} -- \textit{The UNIX Shell} from Software Carpentry
+		\item \url{https://missing.csail.mit.edu/2020/course-shell/} -- \textit{the shell} from MIT
+		\item \url{https://sciware.flatironinstitute.org/23_CommandLine/slides.html} -- \textit{Command line and shell interaction} from the Flatiron Institute
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Interested in more advanced topics?}
+	\begin{itemize}
+		\item Alternative shells: \texttt{zsh}\footnote{The default in macOS since 2019.}, \texttt{fish}, \dots
+		\item Alternative terminal emulators: \texttt{kitty}, \texttt{iTerm2}, \dots
+		\item Terminal multiplexers: \texttt{screen}, \texttt{tmux}
+	\end{itemize}
+\end{frame}
+
+\end{document}
