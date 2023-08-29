@@ -16,6 +16,7 @@ jobs:
       - name: Release
         # uses: actions/upload-artifact@v3
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             intro.pdf
