@@ -1,6 +1,6 @@
 # KIPAC Computing
 
-## Latest Bootcamp
+## Latest Workshop
 
 - [Intro](https://github.com/sidneymau/kipac-bootcamp/releases/latest/download/intro.pdf)
 - [The Command Line](https://github.com/sidneymau/kipac-bootcamp/releases/latest/download/command-line.pdf)

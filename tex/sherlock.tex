@@ -15,7 +15,7 @@
 
 %Information to be included in the title page:
 \title{Sherlock}
-\subtitle{KIPAC Computing Bootcamp 2023}
+\subtitle{KIPAC Computing Workshop 2023}
 \author[S. Mau]{Sidney Mau}
 \institute[Stanford]{Stanford University}
 \date[\today]{\today}
@@ -116,6 +116,20 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Interactive GPU Sessions}
+	\texttt{sh\_dev} supports interactive GPU sessions:\footnote{\url{https://news.sherlock.stanford.edu/publications/instant-lightweight-gpu-instances-are-now-available}}
+	\begin{verbatim}
+		$ sh_dev -g 1 
+		salloc: Granted job allocation 31873950
+		salloc: Waiting for resource configuration
+		salloc: Nodes sh03-17n15 are ready for job
+		$ ml py-pytorch/2.0.0_py39
+		$ python3 -c 'import torch; print(torch.cuda.is_available())'
+		True
+	\end{verbatim}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Running Jobs}
 	\begin{itemize}
@@ -150,7 +164,7 @@
 		python script.py
 	\end{lstlisting}
 	\begin{tikzpicture}[overlay,remember picture]
-		\draw[<-,overlay,blue] (pic cs:line-code-1-end) +(1em,.5ex) -- +(2.5,.5ex) node[right,thin] {in which shell the script is written};
+		\draw[<-,overlay,blue] (pic cs:line-code-1-end) +(1em,.5ex) -- +(2.5,.5ex) node[right,thin] {shell shebang};
 		% \draw[<-,overlay,blue] (pic cs:line-code-2-end) +(1em,.7ex) -| (pic cs:line-code-7-end) +(1em,.7ex) -| +(2.5,1) node[above,thin] {arguments to \texttt{sbatch}};
 		% \draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue] (pic cs:line-code-2-end) -- (pic cs:line-code-7-end) node[right,thin] {arguments to \texttt{sbatch}};
 		\draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue]
@@ -197,6 +211,7 @@
 		# content of job goes here
 	\end{verbatim}
 \end{frame}
+
 
 % tasks vs nodes vs cpus
 % how to ask for a node:
