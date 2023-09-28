@@ -2,9 +2,9 @@
 
 ## Latest Workshop
 
-- [Intro](https://github.com/sidneymau/kipac-bootcamp/releases/latest/download/intro.pdf)
-- [The Command Line](https://github.com/sidneymau/kipac-bootcamp/releases/latest/download/command-line.pdf)
-- [Sherlock](https://github.com/sidneymau/kipac-bootcamp/releases/latest/download/sherlock.pdf)
+- [Intro](https://github.com/sidneymau/kipac-computing-workshop/releases/latest/download/intro.pdf)
+- [The Command Line](https://github.com/sidneymau/kipac-computing-workshop/releases/latest/download/command-line.pdf)
+- [Sherlock](https://github.com/sidneymau/kipac-computing-workshop/releases/latest/download/sherlock.pdf)
 
 ## External Links
 
