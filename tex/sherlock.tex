@@ -3,13 +3,13 @@
 \usecolortheme{smau}
 
 \usepackage{multirow}
-\usepackage{listings}
-\usepackage{lstautogobble}
-\usepackage{tikz}
-\usetikzlibrary{tikzmark}
-\usetikzlibrary{calc}
-\usetikzlibrary{decorations.pathreplacing}
-\usetikzmarklibrary{listings}
+% \usepackage{listings}
+% \usepackage{lstautogobble}
+% \usepackage{tikz}
+% \usetikzlibrary{tikzmark}
+% \usetikzlibrary{calc}
+% \usetikzlibrary{decorations.pathreplacing}
+% \usetikzmarklibrary{listings}
 
 %-------------------------------------------------------------------------------
 
@@ -151,7 +151,7 @@
 
 \begin{frame}[fragile]
 	\frametitle{Example sbatch script}
-	\begin{lstlisting}[autogobble=true,basicstyle=\ttfamily,name=code]
+	\begin{verbatim}
 		#!/bin/bash
 		#SBATCH --partition=kipac
 		#SBATCH --ntasks=1
@@ -162,56 +162,8 @@
 		
 		source ~/setup.sh
 		python script.py
-	\end{lstlisting}
-	\begin{tikzpicture}[overlay,remember picture]
-		\draw[<-,overlay,blue] (pic cs:line-code-1-end) +(1em,.5ex) -- +(2.5,.5ex) node[right,thin] {shell shebang};
-		% \draw[<-,overlay,blue] (pic cs:line-code-2-end) +(1em,.7ex) -| (pic cs:line-code-7-end) +(1em,.7ex) -| +(2.5,1) node[above,thin] {arguments to \texttt{sbatch}};
-		% \draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue] (pic cs:line-code-2-end) -- (pic cs:line-code-7-end) node[right,thin] {arguments to \texttt{sbatch}};
-		\draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue]
-			($([xshift=18em]pic cs:line-code-2-start)!([yshift=1ex]pic cs:line-code-2-start)!($([xshift=18em]pic cs:line-code-2-start)-(0,1)$)$) --
-			($([xshift=18em]pic cs:line-code-7-start)!([yshift=0ex]pic cs:line-code-7-start)!($([xshift=18em]pic cs:line-code-7-start)-(0,1)$)$)
-			node [right,pos=0.5,thin] {arguments to \texttt{sbatch}};
-		\draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue]
-			($([xshift=12em]pic cs:line-code-9-start)!([yshift=1ex]pic cs:line-code-9-start)!($([xshift=12em]pic cs:line-code-2-start)-(0,1)$)$) --
-			($([xshift=12em]pic cs:line-code-10-start)!([yshift=0ex]pic cs:line-code-10-start)!($([xshift=12em]pic cs:line-code-7-start)-(0,1)$)$)
-			node [right,pos=0.5,thin] {code to be run};
-		% \draw[decoration={brace,amplitude=0.5em},decorate,overlay,blue]
-		% 	($(pic cs:line-code-2-end) +(1em,0)$)--
-		% 	($(pic cs:line-code-7-end) +(1em,0)$)
-		% 	node[right,thin] {arguments to \texttt{sbatch}};
-		% \draw[<-,overlay,blue] (pic cs:line-code-8-end) +(1em,.7ex) -| (pic cs:line-code-9-end) +(1em,.7ex) -| +(2.5,1) node[above,thin] {code to be run};
-	\end{tikzpicture}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Example sbatch script}
-	\begin{verbatim}
-		#!/bin/bash
-		#SBATCH --partition=kipac
-		#SBATCH -N 1
-		#SBATCH --ntasks-per-node=1
-		#SBATCH -c 32
-		#SBATCH --mem=0
-		#SBATCH --time=1:00:00
-		
-		# content of job goes here
 	\end{verbatim}
 \end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Example sbatch script}
-	\begin{verbatim}
-		#!/bin/bash
-		#SBATCH --partition=kipac
-		#SBATCH --nodes=1
-		#SBATCH --exclusive
-		#SBATCH --mem=0
-		#SBATCH --time=1:00:00
-		
-		# content of job goes here
-	\end{verbatim}
-\end{frame}
-
 
 % tasks vs nodes vs cpus
 % how to ask for a node:
